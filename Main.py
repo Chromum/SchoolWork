@@ -6,7 +6,12 @@ credentialJson = {}
 
 
 def SignIn():
-  print("Sign In")
+  Username = input("What is your Username \n")
+  Password = input("What is your Password \n")
+
+
+  PlayernNameSystem()
+  
   
 
 
@@ -16,37 +21,15 @@ def SignUp():
     newUsername = input("New Username \n")
     newPassword = input("New Password \n")
 
-    credentialJson = {
-        "Username" : newUsername,
-        "Password" : newPassword
-    }
     
-    dump = pickle.dumps(credentialJson)
+    
+    file = open(fileName,'a')
+    file.writelines(newUsername + "|" + newPassword)
+    file.write("\n")
+    file.close()
 
-##
-##    if os.stat(fileName).st_size == 0:
-##      Poo = open(fileName, "w"):
-##      Poo.write(dump)
-##    else:
-##      p = open( fileName,"rb")
-##      data = pickle.load(p)
-##      temp = {}
-##      temp = data
-##      temp.append(dump)
-##      data = temp
-##      pickle.dump(data, l)
-
-
-
-  
-  
-##  
-##
-##
-##if(input("Are you a new user \n") == "Yes"):
-##  SignUp()
-##else:
-##  SignIn()
+    PlayernNameSystem()
+    
 
 #Game
 
@@ -121,7 +104,7 @@ def GameSetup(player1Name, player2Name):
 
 #Temp Sign in system
 
-def SignInSystem():
+def PlayernNameSystem():
     player1Name = input("What is player ones name \n")
     player2Name = input("What is player twos name \n")
 
@@ -130,7 +113,7 @@ def SignInSystem():
         GameSetup(player1Name,player2Name)
     else:
         print("Player Names are empty please enter a name OR your names are the same \n")
-        SignInSystem()
+        PlayernNameSystem()
 
 
 
@@ -139,9 +122,12 @@ def SignInSystem():
 
 
 
+if(input("Are you a new user").lower() == "yes"):
+  SignUp()
+else:
+  SignIn()
+  
 
 
 
-
-SignInSystem()
 
